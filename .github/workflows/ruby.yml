@@ -6,10 +6,16 @@ jobs:
   update_bundle:
     runs-on: ubuntu-latest
     steps:
+    - name: Get Current Date
+      uses: ajilraju/action-date@v0.0.1
+      id: current-date
+      with:
+        args: date date +"%Y_%m_%d""
+
     - name: Create Branch
       uses: peterjgrainger/action-create-branch@v1.0.0
       with:
-        branch: bundle-update-${{ date | date('Y_M_D') }}
+        branch: bundle-update-${{ steps.current-date.outputs }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
