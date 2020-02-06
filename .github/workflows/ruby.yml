@@ -6,17 +6,18 @@ jobs:
   update_bundle:
     runs-on: ubuntu-latest
     steps:
-    - uses: peterjgrainger/action-create-branch@v1.0.0
     - name: Create Branch
+      uses: peterjgrainger/action-create-branch@v1.0.0
       with:
         branch: 'bundle-update'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - uses: actions/checkout@v2
-    - name: Set up Ruby 2.6
 
-    - uses: actions/setup-ruby@v1
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+
     - name: Bundle update 
       with:
         ruby-version: 2.6.x
@@ -25,8 +26,8 @@ jobs:
         bundle install --jobs 4 --retry 3
         bundle exec rake
 
-    - uses: stefanzweifel/git-auto-commit-action@v2.5.0
     - name: Commit
+      uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with: 
         commit_message: Apply automatic changes
         branch: ${{ github.head_ref }}
