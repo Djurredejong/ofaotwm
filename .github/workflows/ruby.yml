@@ -17,10 +17,11 @@ jobs:
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
-    - run: |
-      gem install bundler
-      bundle install --jobs 4 --retry 3
-      bundle exec rake
+    - name: Bundle update
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bundle update 
 
     - name: Commit
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
