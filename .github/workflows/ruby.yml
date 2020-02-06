@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Get Current Date
-      uses: ajilraju/action-date@v0.0.1
+      uses: ajilraju/action-date@v0.0.2
       id: current-date
       with:
         args: date date +"%Y_%m_%d""
