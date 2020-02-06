@@ -23,6 +23,7 @@ jobs:
         bundle install --jobs 4 --retry 3
         bundle exec rake
   commit:
+    runs-on: ubuntu-latest
     steps:
     - uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with: 
