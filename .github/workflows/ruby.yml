@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Get Current Date
-      run: echo $(date +"%Y_%m_%d")
+      run: echo "::set-output name=date::$(date '+%Y_%m_%d')"
       id: current-date
 
     - name: Create Branch
       uses: peterjgrainger/action-create-branch@v1.0.0
       with:
-        branch: bundle-update-${{ steps.current-date.outputs }}
+        branch: bundle-update-${{ steps.current-date.outputs.date }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
