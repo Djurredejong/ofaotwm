@@ -29,9 +29,10 @@ jobs:
         bundle update 
 
     - name: Commit
-      uses: EndBug/add-and-commit@v2
-      with: 
-        commit_message: 'Apply automatic changes'
-        branch: ${{ github.head_ref }}
+      run: |
+        git commit -am "Add updates"
+
+    - name: Push Changes 
+      uses: ad-m/github-push-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
