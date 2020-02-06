@@ -7,10 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Get Current Date
-      uses: ajilraju/action-date@v0.0.2
+      run: echo $(date +"%Y_%m_%d")
       id: current-date
-      with:
-        args: date date +"%Y_%m_%d""
 
     - name: Create Branch
       uses: peterjgrainger/action-create-branch@v1.0.0
