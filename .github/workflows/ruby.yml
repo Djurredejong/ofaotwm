@@ -9,7 +9,7 @@ jobs:
     - name: Create Branch
       uses: peterjgrainger/action-create-branch@v1.0.0
       with:
-        branch: bundle-update-${date +"%Y_%m_%d"}
+        branch: bundle-update-{{date | date('Y_M_D')}}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
