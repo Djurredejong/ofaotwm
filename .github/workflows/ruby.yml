@@ -32,6 +32,7 @@ jobs:
     - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
+        source_branch: ""
         destination_branch: "master"
         pr_title: "Full dependency update"
         pr_body: ":crown: *An automated PR*"
