@@ -1,5 +1,12 @@
 {
   "name": "ofaotwm",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^3.0.0"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Djurredejong/ofaotwm.git",
+  "author": "Djurre de Jong <djurre.dejong@nedap.com>",
+  "license": "MIT"
 }
