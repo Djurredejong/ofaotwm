@@ -27,7 +27,7 @@ jobs:
         git config --global user.name "Djurre de jong"
         git checkout -b "bundle-update-${{ steps.current-date.outputs.date }}"
         git commit -am "Add updates"
-        git push
+        git push --set-upstream origin "bundle-update-${{ steps.current-date.outputs.date  }}"
 
     - name: pull-request
       uses: repo-sync/pull-request@v2
