@@ -24,6 +24,8 @@ jobs:
       with:
         auth-token: ${{ secrets.FURY_AUTH }}
         cmd: upgrade
+      env:
+        FURY_AUTH: ${{ secrets.FURY_AUTH }}
 
     - name: Create Pull Request
       id: cpr
