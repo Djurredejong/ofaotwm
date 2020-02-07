@@ -25,15 +25,17 @@ jobs:
       run: |
         git config --global user.email "djurre.dejong@nedap.com"
         git config --global user.name "Djurre de jong"
-        git checkout -b "bundle-update-${{ steps.current-date.outputs.date }}"
+        git checkout -b "bundle-update-${{ steps.current-date.outputs.date  }}"
         git commit -am "Add updates"
-        git push
+
+    - name: Push Changes 
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
-        source_branch: "bundle-update-${{ steps.current-date.outputs.date }}"
-        destination_branch: "master"
         pr_title: "Full dependency update"
         pr_body: ":crown: *An automated PR*"
         pr_reviewer: "Djurredejong"
