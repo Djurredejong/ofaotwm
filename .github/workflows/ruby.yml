@@ -15,7 +15,7 @@ jobs:
     - uses: borales/actions-yarn@v2.0.0
       with:
         auth-token: ${{ secrets.FURY_AUTH }}
-        registry-url: https://npm-proxy.fury.io/${{ secrets.FURY_AUTH }}/nedap-healthcare/
+        registry-url: npm-proxy.fury.io/${{ secrets.FURY_AUTH }}/nedap-healthcare/
         cmd: upgrade
       env:
         FURY_AUTH: ${{ secrets.FURY_AUTH }}
