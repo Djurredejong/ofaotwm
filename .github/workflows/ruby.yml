@@ -2,7 +2,7 @@ name: Ruby
 
 on: 
   schedule:
-    - cron: '25 8 * * 5'
+    - cron: '10 8 * * 5'
 
 jobs:
   update_bundle:
@@ -20,8 +20,7 @@ jobs:
       run: |
         sudo apt -yqq install libsqlite3-dev
         gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle update 
+        bundle update --jobs 4 --retry 3 
 
     - name: Create Pull Request
       id: cpr
