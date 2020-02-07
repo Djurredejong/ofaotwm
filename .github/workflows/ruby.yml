@@ -10,13 +10,6 @@ jobs:
       run: echo "::set-output name=date::$(date '+%Y_%m_%d')"
       id: current-date
 
-    - name: Create Branch
-      uses: peterjgrainger/action-create-branch@v1.0.0
-      with:
-        branch: bundle-update-${{ steps.current-date.outputs.date }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - uses: actions/checkout@v2
     - uses: actions/setup-ruby@v1
       with:
@@ -31,10 +24,21 @@ jobs:
     - name: Commit
       run: |
         git config --global user.email "djurre.dejong@nedap.com"
-        git config --global user.name "Djurredejong"
+        git config --global user.name "Djurre de jong"
+        git checkout -b "bundle-update-${{ steps.current-date.outputs.date  }}"
         git commit -am "Add updates"
 
     - name: Push Changes 
       uses: ad-m/github-push-action@master
       with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: pull-request
+      uses: repo-sync/pull-request@v2
+      with:
+        pr_title: "Full dependency update"
+        pr_body: ":crown: *An automated PR*"
+        pr_reviewer: "Djurredejong"
+        pr_assignee: "Djurredejong"
+        pr_label: "Dependencies"
         github_token: ${{ secrets.GITHUB_TOKEN }}
