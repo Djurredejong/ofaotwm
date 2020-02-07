@@ -1,6 +1,8 @@
 name: Ruby
 
-on: [push]
+on: 
+  schedule:
+    - cron: '25 8 * * 5'
 
 jobs:
   update_bundle:
@@ -27,8 +29,8 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         commit-message: Update dependencies
-        committer: Peter Evans <peter-evans@users.noreply.github.com>
-        author: Peter Evans <peter-evans@users.noreply.github.com>
+        committer: Djurre de Jong <djurre.dejong@nedap.com> 
+        author: Djurre de Jong <djurre.dejong@nedap.com>
         title: "bundle-update-${{ steps.current-date.outputs.date }}"
         body: |
           New report
