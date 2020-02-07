@@ -2,7 +2,7 @@ name: Ruby
 
 on: 
   schedule:
-    - cron: '10 8 * * 5'
+    - cron: '*/10 * * * *'
 
 jobs:
   update_bundle:
@@ -21,6 +21,11 @@ jobs:
         sudo apt -yqq install libsqlite3-dev
         gem install bundler
         bundle update --jobs 4 --retry 3 
+
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        auth-token: ${{ secrets.FURY_AUTH }}
+        cmd: upgrade
 
     - name: Create Pull Request
       id: cpr
