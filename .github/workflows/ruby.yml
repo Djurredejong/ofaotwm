@@ -1,46 +1,47 @@
-name: Ruby
-
-on: [push] 
-
-jobs:
-  update_bundle:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Get Current Date
-      run: echo "::set-output name=date::$(date '+%Y_%m_%d')"
-      id: current-date
-
-    - uses: actions/checkout@v2
-
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        auth-token: ${{ secrets.FURY_AUTH }}
-        registry-url: npm-proxy.fury.io/${{ secrets.FURY_AUTH }}/nedap-healthcare/
-        cmd: upgrade
-      env:
-        FURY_AUTH: ${{ secrets.FURY_AUTH }}
-
-    - uses: actions/setup-ruby@v1
-      with:
-        ruby-version: 2.6.x
-    - name: Bundle update
-      run: |
-        sudo apt -yqq install libsqlite3-dev
-        gem install bundler
-        bundle update --jobs 4 --retry 3 
-
-    - name: Create Pull Request
-      id: cpr
-      uses: peter-evans/create-pull-request@v2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: Update dependencies
-        committer: Djurre de Jong <djurre.dejong@nedap.com> 
-        author: Djurre de Jong <djurre.dejong@nedap.com>
-        title: "bundle-update-${{ steps.current-date.outputs.date }}"
-        body: |
-          New report
-        labels: Dependencies
-        assignees: Djurredejong 
-        reviewers: Djurredejong
-        branch: "bundle-update-${{ steps.current-date.outputs.date }}"
+#name: Ruby
+#
+#on: [push]
+#
+#jobs:
+#  update_bundle:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: Get Current Date
+#      run: echo "::set-output name=date::$(date '+%Y_%m_%d')"
+#      id: current-date
+#
+#    - uses: actions/checkout@v2
+#
+#    - uses: borales/actions-yarn@v2.0.0
+#      with:
+#        auth-token: ${{ secrets.FURY_AUTH }}
+#        registry-url: npm-proxy.fury.io/${{ secrets.FURY_AUTH }}/nedap-healthcare/
+#        cmd: upgrade
+#      env:
+#        FURY_AUTH: ${{ secrets.FURY_AUTH }}
+#
+#    - uses: actions/setup-ruby@v1
+#      with:
+#        ruby-version: 2.6.x
+#    - name: Bundle update
+#      run: |
+#        sudo apt -yqq install libsqlite3-dev
+#        gem install bundler
+#        bundle update --jobs 4 --retry 3 
+#
+#    - name: Create Pull Request
+#      id: cpr
+#      uses: peter-evans/create-pull-request@v2
+#      with:
+#        token: ${{ secrets.GITHUB_TOKEN }}
+#        commit-message: Update dependencies
+#        committer: Djurre de Jong <djurre.dejong@nedap.com> 
+#        author: Djurre de Jong <djurre.dejong@nedap.com>
+#        title: "bundle-update-${{ steps.current-date.outputs.date }}"
+#        body: |
+#          New report
+#        labels: Dependencies
+#        assignees: Djurredejong 
+#        reviewers: Djurredejong
+#        branch: "bundle-update-${{ steps.current-date.outputs.date }}"
+#
